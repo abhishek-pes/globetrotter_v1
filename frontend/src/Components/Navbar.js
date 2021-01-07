@@ -24,7 +24,7 @@ function Navbar() {
                     }}>Logout
                     </button>,
                 <li><Link to="/">viewProfile</Link></li>,
-                <li><Link to="/">ProtectedStuff</Link></li>,
+                <li><Link to="/postdestination">Post Destination</Link></li>,
             ]
             )
         }

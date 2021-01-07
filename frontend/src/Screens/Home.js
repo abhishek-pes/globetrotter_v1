@@ -1,5 +1,6 @@
 import { React, useEffect, useContext } from 'react'
 import { UserContext } from '../App'
+import Card from '../Components/Card'
 
 function Home() {
 
@@ -19,11 +20,12 @@ function Home() {
             .catch(err => console.log(err))
     }, [])
     console.log(state);
-    return (
-        <div>
-            Welcome, {state ? state.name : 'loading'}
+    return ([
+        <Card destination="somewhere" description="something" />,
+        <Card destination="everywhere" description="something" />,
+        <Card destination="nowhere" description="something" />,
 
-        </div>
+    ]
     )
 }
 

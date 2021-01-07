@@ -7,6 +7,7 @@ import Signup from './Screens/Signup';
 import Signin from './Screens/Signin';
 import Home from './Screens/Home';
 import { reducer, initialState } from './Reducer/UserReducer'
+import PostDestination from './Screens/PostDestination';
 
 export const UserContext = createContext();
 
@@ -30,6 +31,7 @@ function Routes() {
       <Route exact path='/signup' component={Signup}></Route>
       <Route exact path='/signin' component={Signin}></Route>
       <Route exact path='/home' component={Home}></Route>
+      <Route exact path='/postdestination' component={PostDestination}></Route>
     </Switch>
   )
 }

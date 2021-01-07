@@ -57,7 +57,7 @@ function Signin() {
     return (
         <div style={{ display: 'flex', margin: '10px auto', justifyContent: 'center' }}>
             <div className='card' style={style}>
-                <h2>SkyRocket</h2>
+                <h2>GlobeTrotter</h2>
                 <h4>Sign In</h4>
                 <input style={{ color: "white" }} type="text" placeholder='Enter your Email' value={email} onChange={(e) => setEmail(e.target.value)}></input>
                 <input style={{ color: "white" }} type={type} id="passwrd" placeholder='Enter your Password' value={password} onChange={(e) => setPassword(e.target.value)}></input><br /><br />
