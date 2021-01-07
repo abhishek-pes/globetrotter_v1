@@ -4,23 +4,24 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const auth = require("../../middleware/auth");
 
 const User = require("../../models/User");
 
 const router = express.Router();
 
-// router.get("/me", auth, async (req, res) => {
-//   try {
-//     const user = await User.find({ _id: req.headers.id }).select('-password')
-//     if (!user) {
-//       return res.status(400).json({ msg: "There is no profile for this user" });
-//     }
-//     res.json(user);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("server error");
-//   }
-// });
+router.get("/me", auth, async (req, res) => {
+  try {
+    const user = await User.find({ _id: req.headers.id }).select('-password')
+    if (!user) {
+      return res.status(400).json({ msg: "There is no profile for this user" });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("server error");
+  }
+});
 
 router.post(
   "/",

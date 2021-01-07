@@ -7,7 +7,6 @@ function Home() {
     const [dests, setDests] = useState([])
     const { state, dispatch } = useContext(UserContext)
     useEffect(() => {
-        //fetch the logged in user details
         fetch("http://localhost:5000/api/posts", {
             method: "GET",
             headers: {
