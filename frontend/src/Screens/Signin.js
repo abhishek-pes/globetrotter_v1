@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { UserContext } from '../App'
 
 function Signin() {
 
     const history = useHistory()
-
+    const { state, dispatch } = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [type, setType] = useState('password')
@@ -34,6 +35,7 @@ function Signin() {
                     localStorage.setItem('jwt', res.token)
                     localStorage.setItem('user', JSON.stringify(res.user))
                     console.log(res)
+                    dispatch({ type: 'USER', payload: res.user })
                     history.push('/home')
                 }
             })

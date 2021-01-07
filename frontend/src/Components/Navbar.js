@@ -1,9 +1,8 @@
-import { React, useContext } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { React, useContext, useEffect } from 'react'
+import { NavLink as Link, useHistory } from 'react-router-dom'
 import { UserContext } from '../App'
 
 function Navbar() {
-
     const { state, dispatch } = useContext(UserContext)
     const history = useHistory()
     const logoutbtn = {
@@ -23,7 +22,7 @@ function Navbar() {
                         dispatch({ type: 'CLEAR' })
                         history.push('/')
                     }}>Logout
-                </button>,
+                    </button>,
                 <li><Link to="/">viewProfile</Link></li>,
                 <li><Link to="/">ProtectedStuff</Link></li>,
             ]
@@ -39,7 +38,7 @@ function Navbar() {
     }
 
     return (
-        <nav className="grey darken-1 ">
+        <nav className="nav-wrapper grey darken-1 ">
             <div className="nav-wrapper">
                 <Link to={state ? "/home" : "/"} className="brand-logo right">GlobeTrotter</Link>
                 <ul className="left">
