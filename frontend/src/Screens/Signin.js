@@ -1,11 +1,8 @@
-import React, { useState, useReducer, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { UserContext } from '../App.js'
-
 
 function Signin() {
 
-    // const { state, dispatch } = useContext(UserContext)
     const history = useHistory()
 
     const [email, setEmail] = useState('')
@@ -18,7 +15,6 @@ function Signin() {
         } else {
             setType('password')
         }
-
     }
 
     const clicked = () => {
@@ -37,9 +33,8 @@ function Signin() {
                 else {
                     localStorage.setItem('jwt', res.token)
                     localStorage.setItem('user', JSON.stringify(res.user))
-                    // dispatch({ type: 'USER', payload: res.user })
                     console.log(res)
-                    history.push('/')
+                    history.push('/home')
                 }
             })
             .catch((err) => {
