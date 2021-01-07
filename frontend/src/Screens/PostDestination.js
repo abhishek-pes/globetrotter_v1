@@ -22,6 +22,9 @@ function PostDestination() {
         })
             .then((res) => res.json())
             .then(res => {
+                if (res.err) {
+                    alert('asfdalfk')
+                }
                 console.log(res)
                 history.push('/home')
             })
@@ -43,10 +46,10 @@ function PostDestination() {
             <div className='card' style={style}>
                 <h2 style={{ textAlign: "center", color: "#12BDA6" }}>Let the world know</h2>
                 <h5>Your Dream Destination</h5>
-                <input type="text" placeholder='Name' value={destination} onChange={(e) => { setDestination(e.target.value) }}></input>
-                <input type="text" placeholder='Description' value={description} onChange={(e) => { setDescription(e.target.value) }}></input>
-                <input type="text" placeholder='Valid Image URL' value={url} onChange={(e) => { setUrl(e.target.value) }}></input><br /><br />
-                <button onClick={() => clicked()} className="waves-effect waves-light btn">Sell!</button><br /><br />
+                <input style={{ color: "white" }} type="text" placeholder='Name' value={destination} onChange={(e) => { setDestination(e.target.value) }}></input>
+                <input style={{ color: "white" }} type="text" placeholder='Description' value={description} onChange={(e) => { setDescription(e.target.value) }}></input>
+                <input style={{ color: "white" }} type="text" placeholder='Valid Image URL' value={url} onChange={(e) => { setUrl(e.target.value) }}></input><br /><br />
+                <button onClick={() => clicked()} className="waves-effect waves-light btn">Post!</button><br /><br />
             </div>
         </div>
     )

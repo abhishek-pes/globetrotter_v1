@@ -1,13 +1,14 @@
-import { React, useEffect, useContext } from 'react'
+import { React, useEffect, useContext, useState } from 'react'
 import { UserContext } from '../App'
 import Card from '../Components/Card'
 
 function Home() {
 
+    const [dests, setDests] = useState([])
     const { state, dispatch } = useContext(UserContext)
     useEffect(() => {
         //fetch the logged in user details
-        fetch("http://localhost:5000/api/login", {
+        fetch("http://localhost:5000/api/posts", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -15,17 +16,18 @@ function Home() {
             }
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
+                setDests(res)
             })
-            .catch(err => console.log(err))
+            .catch(err => alert('soettext'))
     }, [])
-    console.log(state);
-    return ([
-        <Card destination="somewhere" description="something" />,
-        <Card destination="everywhere" description="something" />,
-        <Card destination="nowhere" description="something" />,
-
-    ]
+    return (
+        <div>
+            {
+                dests.map((d) => {
+                    return <Card key={d._id} destination={d.destination} description={d.description} url={d.image_url} />
+                })
+            }
+        </div>
     )
 }
 

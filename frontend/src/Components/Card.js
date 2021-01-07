@@ -2,17 +2,17 @@ import React from 'react'
 
 function Card(props) {
     return (
-        <div class="row ">
-            <div class="col s12 m7">
-                <div class="card hoverable">
-                    <div class="card-image">
-                        <img src="https://www.diabetes.co.uk/wp-content/uploads/2019/01/iStock-10019278401.jpg" />
-                        <span class="card-title" >{props.destination}</span>
+        <div className="row ">
+            <div className="col s12 m7">
+                <div className="card hoverable">
+                    <div className="card-image">
+                        <img src={props.url} />
+                        <span className="card-title" >{props.destination}</span>
                     </div>
-                    <div class="card-content">
+                    <div className="card-content">
                         {props.description}
                     </div>
-                    <div class="card-action">
+                    <div className="card-action">
                         <a href="#">This is a link</a>
                     </div>
                 </div>
