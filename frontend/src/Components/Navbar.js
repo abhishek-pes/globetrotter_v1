@@ -23,7 +23,7 @@ function Navbar() {
                         history.push('/')
                     }}>Logout
                     </button>,
-                <li><Link to="/">viewProfile</Link></li>,
+                <li><Link to="/viewprofile">viewProfile</Link></li>,
                 <li><Link to="/postdestination">Post Destination</Link></li>,
             ]
             )

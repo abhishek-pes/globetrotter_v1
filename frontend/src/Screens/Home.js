@@ -12,7 +12,8 @@ function Home() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "x-auth-token": localStorage.getItem('jwt')
+                "x-auth-token": localStorage.getItem('jwt'),
+                "id": (JSON.parse(localStorage.getItem('user'))._id).toString()
             }
         }).then(res => res.json())
             .then(res => {
