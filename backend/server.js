@@ -9,7 +9,7 @@ const app = express();
 connectDB();
 //middle ware
 app.use(express.json());
-app.unsubscribe(cors());
+app.use(cors());
 
 //routes
 app.use("/api/users", require("./routes/api/users"));

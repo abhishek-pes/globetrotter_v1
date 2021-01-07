@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 function Navbar() {
     return (
         <nav className="grey darken-1 ">
-            <div class="nav-wrapper">
-                <Link to="/" class="brand-logo right">GT</Link>
-                <ul class="left">
+            <div className="nav-wrapper">
+                <Link to="/" className="brand-logo right">GT</Link>
+                <ul className="left">
                     <li><Link to="/signin">Sign In</Link></li>
                     <li><Link to="/signout">Sign Out</Link></li>
                     <li><Link to="/signup">Register</Link></li>

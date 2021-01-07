@@ -6,7 +6,7 @@ import { UserContext } from '../App.js'
 function Signin() {
 
     // const { state, dispatch } = useContext(UserContext)
-    // const history = useHistory()
+    const history = useHistory()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -21,31 +21,31 @@ function Signin() {
 
     }
 
-    // const clicked = () => {
-    //     fetch('http://localhost:5000/signin', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ email, password })
-    //     })
-    //         .then(res => res.json())
-    //         .then(res => {
-    //             if (res.error) {
-    //                 console.log(res.error)
-    //             }
-    //             else {
-    //                 localStorage.setItem('jwt', res.token)
-    //                 localStorage.setItem('user', JSON.stringify(res.user))
-    //                 dispatch({ type: 'USER', payload: res.user })
-    //                 console.log(res)
-    //                 history.push('/')
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    // }
+    const clicked = () => {
+        fetch('http://localhost:5000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+            .then(res => res.json())
+            .then(res => {
+                if (res.error) {
+                    console.log(res.error)
+                }
+                else {
+                    localStorage.setItem('jwt', res.token)
+                    localStorage.setItem('user', JSON.stringify(res.user))
+                    // dispatch({ type: 'USER', payload: res.user })
+                    console.log(res)
+                    history.push('/')
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     const style = {
         textAlign: 'center',
@@ -68,7 +68,7 @@ function Signin() {
                     Click here to show/hide Password
                 </div>
                 <br></br><br></br>
-                <button className="waves-effect waves-light btn">Sign In</button><br /><br />
+                <button onClick={() => clicked()} className="waves-effect waves-light btn">Sign In</button><br /><br />
                 Don't have an account? <br></br>
                 <Link to='/signup'>Sign Up here!</Link>
             </div>
