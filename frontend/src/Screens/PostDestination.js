@@ -38,13 +38,13 @@ function PostDestination() {
         borderRadius: '10px',
         padding: '30px',
         textAlign: 'left',
-        backgroundColor: '#080004',
+        backgroundColor: '#444',
         color: 'white'
     }
     return (
         <div>
             <div className='card' style={style}>
-                <h2 style={{ textAlign: "center", color: "#12BDA6" }}>Let the world know</h2>
+                <h2 style={{ textAlign: "center", color: "white" }}>Let the world know</h2>
                 <h5>Your Dream Destination</h5>
                 <input style={{ color: "white" }} type="text" placeholder='Name' value={destination} onChange={(e) => { setDestination(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Description' value={description} onChange={(e) => { setDescription(e.target.value) }}></input>
