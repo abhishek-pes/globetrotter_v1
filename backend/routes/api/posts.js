@@ -151,11 +151,9 @@ router.post(
 
 router.get("/", async (req, res) => {
   try {
-    const posts = await Posts.find().populate("user", [
-      "name",
-      "avatar",
-      "email",
-    ]);
+    const posts = await Posts.find({
+      user: { $ne: req.headers.id },
+    }).populate("user", ["name", "avatar", "email"]);
     return res.json(posts);
   } catch (err) {
     console.error(err.message);
