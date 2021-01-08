@@ -24,7 +24,7 @@ function Home() {
         <div>
             {
                 dests.map((d) => {
-                    return <Card key={d._id} destination={d.destination} description={d.description} url={d.image_url} />
+                    return <Card user={d.user} key={d._id} destination={d.destination} description={d.description} url={d.image_url} />
                 })
             }
         </div>
