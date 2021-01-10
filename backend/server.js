@@ -32,14 +32,13 @@ app.use("/api/posts", require("./routes/api/posts"));
 io.on('connection', (socket) => {
     console.log('new user connected')
 
-    socket.on('join', ({ name, room, callback }) => {
-        const { error, user } = addUser({ id: socket.id, name, room })
-        // if (error) callback(error)
+    socket.on('join', ({ name, room }) => {
+        const { user } = addUser({ id: socket.id, name, room })
+        console.log(user)
         socket.join(user.room)
         socket.emit('message', { user: 'admin', text: `Welcome to the chatroom, ${user.name}` })
         socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined the chat` })
         io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
-        // callback()
     })
 
     socket.on('sendMessage', (message, callback) => {
@@ -48,7 +47,7 @@ io.on('connection', (socket) => {
         callback()
     })
 
-    socket.on('disconnect', () => {
+    socket.on('disconnected', () => {
         const user = removeUser(socket.id);
 
         if (user) {

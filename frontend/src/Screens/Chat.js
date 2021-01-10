@@ -18,14 +18,10 @@ function Chat({ location }) {
         setName(name)
         setRoom(room)
 
-        socket.emit('join', { name, room }, (error) => {
-            if (error) {
-                alert(error);
-            }
-        })
+        socket.emit('join', { name, room })
 
         return () => {
-            socket.disconnect()
+            socket.emit('disconnected')
             socket.off()
         }
     }, [ENDPOINT, location.search])
