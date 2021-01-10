@@ -23,5 +23,20 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  friendrequestsent: [
+    {
+      type: String,
+    },
+  ],
+  inbox: [
+    {
+      type: String,
+    },
+  ],
+  friendlist: [
+    {
+      type: String,
+    },
+  ],
 });
 module.exports = User = mongoose.model("user", userSchema);

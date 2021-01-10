@@ -32,7 +32,6 @@ function PostDestination() {
     }
 
     const style = {
-        textAlign: 'center',
         margin: '40px auto',
         maxWidth: '600px',
         borderRadius: '10px',
