@@ -10,6 +10,18 @@ function PostDestination() {
     const [url, setUrl] = useState('')
 
     const clicked = () => {
+
+        fetch('http://localhost:5000/api/test/dest_send', {
+            method: "POST",
+            header: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ destination })
+        }).then((res) => res.json())
+            .then((res) => {
+                console.log(res)
+            }).catch(err => console.log(err))
+
         fetch('http://localhost:5000/api/posts', {
             method: "POST",
             headers: {
