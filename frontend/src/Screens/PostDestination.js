@@ -11,17 +11,17 @@ function PostDestination() {
 
     const clicked = () => {
 
-        fetch('http://localhost:5000/api/test/dest_send', {
-            method: "POST",
-            header: {
-                "Content-Type": "application/json",
-                "x-auth-token": localStorage.getItem('jwt')
-            },
-            body: JSON.stringify({ destination: destination })
-        }).then((res) => res.json())
-            .then((res) => {
-                console.log(res)
-            }).catch(err => console.log(err))
+        // fetch('http://localhost:5000/api/test/dest_send', {
+        //     method: "POST",
+        //     header: {
+        //         "Content-Type": "application/json",
+        //         "x-auth-token": localStorage.getItem('jwt')
+        //     },
+        //     body: JSON.stringify({ destination: destination })
+        // }).then((res) => res.json())
+        //     .then((res) => {
+        //         console.log(res)
+        //     }).catch(err => console.log(err))
 
         fetch('http://localhost:5000/api/posts', {
             method: "POST",

@@ -4,6 +4,8 @@ const Posts = require("../../models/Posts");
 const User = require("../../models/User");
 const { check, validationResult } = require("express-validator");
 const { update } = require("../../models/User");
+const StreamrClient = require('streamr-client')
+const API = 'f085735391c60a402f4742b0f859f8c495472baf411e1bd21fbc579bfa884bf9'
 
 const router = express.Router();
 
@@ -55,6 +57,23 @@ router.post(
     }
 
     const { destination, description, image_url } = req.body;
+
+    //send data to streamr
+    var DEST_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Globetrotter'
+
+    const streamr = new StreamrClient({
+      auth: {
+        privateKey: API,
+      },
+    })
+
+    const msg = {
+      "destination": destination
+    }
+
+    streamr.publish(DEST_STREAM_ID, msg).then(() => {
+      console.log("destination sent")
+    })
 
     //Build profile objects
     const profileFields = {};
