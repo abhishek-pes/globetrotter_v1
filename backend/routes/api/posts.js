@@ -83,13 +83,13 @@ router.post(
     streamr.publish(DEST_STREAM_ID, dest).then(() => {
       console.log("destination sent")
     })
-    streamr.publish(AGE_STREAM_ID, msg).then(() => {
+    streamr.publish(AGE_STREAM_ID, age_send).then(() => {
       console.log("age sent")
     })
     // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
     //   console.log("travel hist sent")
     // })
-    streamr.publish(COO_STREAM_ID, msg).then(() => {
+    streamr.publish(COO_STREAM_ID, origin_send).then(() => {
       console.log("country of origin sent")
     })
 

@@ -62,7 +62,7 @@ function PostDestination() {
                 <h5>Your Dream Destination</h5>
                 <input style={{ color: "white" }} type="text" placeholder='Name' value={destination} onChange={(e) => { setDestination(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Description' value={description} onChange={(e) => { setDescription(e.target.value) }}></input>
-                <input style={{ color: "white" }} type="number" placeholder='Age' value={age} onChange={(e) => { setAge(e.target.value) }}></input>
+                <input style={{ color: "white" }} type="text" placeholder='Age' pattern="[0-9]*" value={age} onChange={(e) => { setAge(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Country of Origin' value={coo} onChange={(e) => { setCoo(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Valid Image URL' value={url} onChange={(e) => { setUrl(e.target.value) }}></input><br /><br />
                 <button onClick={() => clicked()} className="waves-effect waves-light btn">Post!</button><br /><br />
