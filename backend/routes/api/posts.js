@@ -56,10 +56,13 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { destination, description, image_url } = req.body;
+    const { destination, description, age, coo, image_url } = req.body;
 
     //send data to streamr
     var DEST_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Globetrotter'
+    var AGE_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/age'
+    var COO_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/country_of_origin'
+    // var TRAVEL_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel'
 
     const streamr = new StreamrClient({
       auth: {
@@ -67,12 +70,27 @@ router.post(
       },
     })
 
-    const msg = {
+    const dest = {
       "destination": destination
     }
+    const age_send = {
+      "age": age
+    }
+    const origin_send = {
+      "country of origin": coo
+    }
 
-    streamr.publish(DEST_STREAM_ID, msg).then(() => {
+    streamr.publish(DEST_STREAM_ID, dest).then(() => {
       console.log("destination sent")
+    })
+    streamr.publish(AGE_STREAM_ID, msg).then(() => {
+      console.log("age sent")
+    })
+    // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
+    //   console.log("travel hist sent")
+    // })
+    streamr.publish(COO_STREAM_ID, msg).then(() => {
+      console.log("country of origin sent")
     })
 
     //Build profile objects

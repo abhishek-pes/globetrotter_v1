@@ -7,6 +7,8 @@ function PostDestination() {
     const history = useHistory()
     const [destination, setDestination] = useState('')
     const [description, setDescription] = useState('')
+    const [age, setAge] = useState()
+    const [coo, setCoo] = useState('')
     const [url, setUrl] = useState('')
 
     const clicked = () => {
@@ -30,7 +32,7 @@ function PostDestination() {
                 "x-auth-token": localStorage.getItem('jwt')
             },
             body: JSON.stringify({
-                destination, description, image_url: url
+                destination, description, age, coo, image_url: url
             })
         })
             .then((res) => res.json())
@@ -60,6 +62,8 @@ function PostDestination() {
                 <h5>Your Dream Destination</h5>
                 <input style={{ color: "white" }} type="text" placeholder='Name' value={destination} onChange={(e) => { setDestination(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Description' value={description} onChange={(e) => { setDescription(e.target.value) }}></input>
+                <input style={{ color: "white" }} type="number" placeholder='Age' value={description} onChange={(e) => { setAge(e.target.value) }}></input>
+                <input style={{ color: "white" }} type="text" placeholder='Country of Origin' value={description} onChange={(e) => { setCoo(e.target.value) }}></input>
                 <input style={{ color: "white" }} type="text" placeholder='Valid Image URL' value={url} onChange={(e) => { setUrl(e.target.value) }}></input><br /><br />
                 <button onClick={() => clicked()} className="waves-effect waves-light btn">Post!</button><br /><br />
             </div>
