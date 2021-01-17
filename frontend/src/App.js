@@ -8,6 +8,7 @@ import Signin from "./Screens/Signin";
 import Home from "./Screens/Home";
 import Inbox from "./Screens/Inbox";
 import Friends from "./Screens/Friends";
+import Form from "./Screens/Form"
 import { reducer, initialState } from "./Reducer/UserReducer";
 import PostDestination from "./Screens/PostDestination";
 import Profile from "./Screens/Profile";
@@ -40,6 +41,7 @@ function Routes() {
       <Route exact path="/friendlist" component={Friends}></Route>
       <Route exact path="/userdetails/:id" component={UserDetails}></Route>
       <Route path="/chat" component={Chat}></Route>
+      <Route exact path = "/form" component={Form}></Route>
     </Switch>
   );
 }

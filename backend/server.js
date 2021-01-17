@@ -28,7 +28,7 @@ app.use(express.json());
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/login", require("./routes/api/login"));
 app.use("/api/posts", require("./routes/api/posts"));
-
+app.use("/api/test", require("./routes/api/test"));
 io.on('connection', (socket) => {
     console.log('new user connected')
 
