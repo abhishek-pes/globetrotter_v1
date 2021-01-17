@@ -14,9 +14,10 @@ function PostDestination() {
         fetch('http://localhost:5000/api/test/dest_send', {
             method: "POST",
             header: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-auth-token": localStorage.getItem('jwt')
             },
-            body: JSON.stringify({ destination })
+            body: JSON.stringify({ destination: destination })
         }).then((res) => res.json())
             .then((res) => {
                 console.log(res)
