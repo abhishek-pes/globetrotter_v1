@@ -74,7 +74,7 @@ router.post(
       "destination": destination
     }
     const age_send = {
-      "age": age
+      "age": parseInt(age)
     }
     const origin_send = {
       "country of origin": coo
