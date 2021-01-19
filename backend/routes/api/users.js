@@ -5,6 +5,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
+const StreamrClient = require('streamr-client')
+
 
 const User = require("../../models/User");
 const { findById } = require("../../models/User");
@@ -241,12 +243,15 @@ router.post(
         s: "200",
         d: "mm",
       });
+      var playerWallet = StreamrClient.generateEthereumAccount()
+      const privateKey = playerWallet.privateKey
       user = new User({
         name,
         email,
         avatar,
         password,
         accountType,
+        privateKey
       });
 
       //encrypt the password using bcrypt

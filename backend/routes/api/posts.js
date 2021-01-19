@@ -7,6 +7,9 @@ const { update } = require("../../models/User");
 const StreamrClient = require('streamr-client')
 const API = 'f085735391c60a402f4742b0f859f8c495472baf411e1bd21fbc579bfa884bf9'
 
+const SHARED_SECRET = "9rpMdLArQ3C8_-ISvBLrLgrTzIjC2oRFuE5YuPyfyc3w"
+const DATA_UNION_CONTRACT_ADDRESS = "0x9a722acfb84b51e5b01b9b9331648924814f8f8d"
+
 const router = express.Router();
 
 //@route  api/profile/me
@@ -59,15 +62,17 @@ router.post(
     const { destination, description, age, coo, image_url } = req.body;
 
     //send data to streamr
-    var DEST_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Globetrotter'
-    var AGE_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/age'
-    var COO_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/country_of_origin'
-    // var TRAVEL_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel'
+    var DEST_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Destination'
+    var AGE_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Age'
+    var COO_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Country_Of_Origin'
+    //var TRAVEL_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel'
 
     const streamr = new StreamrClient({
       auth: {
-        privateKey: API,
+        privateKey: req.headers.privatekey,
       },
+      url: "wss://hack.streamr.network/api/v1/ws",
+      restUrl : "https://hack.streamr.network/api/v1"
     })
 
     const dest = {
@@ -80,18 +85,22 @@ router.post(
       "country of origin": coo
     }
 
-    streamr.publish(DEST_STREAM_ID, dest).then(() => {
-      console.log("destination sent")
-    })
-    streamr.publish(AGE_STREAM_ID, age_send).then(() => {
-      console.log("age sent")
-    })
+    streamr.joinDataUnion(DATA_UNION_CONTRACT_ADDRESS, SHARED_SECRET)
+    .then((memberDetails)=> {
+    console.log('memberDetails: ', memberDetails)
+
+    streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Age', {
+      age:age
+  }).then(() => console.log("age sent"))
+
+    streamr.publish(DEST_STREAM_ID, dest)
+    // streamr.publish(AGE_STREAM_ID, age_send)
     // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
     //   console.log("travel hist sent")
     // })
-    streamr.publish(COO_STREAM_ID, origin_send).then(() => {
-      console.log("country of origin sent")
-    })
+    streamr.publish(COO_STREAM_ID, origin_send)
+  })
+    
 
     //Build profile objects
     const profileFields = {};

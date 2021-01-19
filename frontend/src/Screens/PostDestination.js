@@ -29,7 +29,8 @@ function PostDestination() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "x-auth-token": localStorage.getItem('jwt')
+                "x-auth-token": localStorage.getItem('jwt'),
+                "privatekey" : (JSON.parse(localStorage.getItem('user')).privateKey).toString()
             },
             body: JSON.stringify({
                 destination, description, age, coo, image_url: url

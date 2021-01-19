@@ -38,5 +38,8 @@ const userSchema = mongoose.Schema({
       type: String,
     },
   ],
+  privateKey: (
+    {type:String}
+  )
 });
 module.exports = User = mongoose.model("user", userSchema);
