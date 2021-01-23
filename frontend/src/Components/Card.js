@@ -89,7 +89,7 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button value={props.fid} onClick={() => sendFriendRequest(props.fid, props.destination)}>SEND FRIEND REQUEST</button>
+              <button value={props.fid} onClick={() => sendFriendRequest(props.fid, props.destination)}>SEND FRIEND REQUEST</button> <i class="material-icons">thumb_up</i>
             </div>
           </div>
         </div>
