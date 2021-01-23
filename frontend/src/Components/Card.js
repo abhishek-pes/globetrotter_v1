@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom'
 function Card(props) {
 
 
-  const sendFriendRequest = (fid) => {
+  const sendFriendRequest = (fid, dest) => {
     fetch("http://localhost:5000/api/users/friend/send", {
       method: "PUT",
       headers: {
         "x-auth-token": localStorage.getItem("jwt"),
         "Content-Type": "application/json",
         uid: JSON.parse(localStorage.getItem("user"))._id.toString(),
-        "fid": fid
+        "fid": fid,
+        "dest": dest,
+        "privatekey": (JSON.parse(localStorage.getItem('user')).privateKey).toString()
       },
     })
       .then((res) => res.json()).then(() => {
@@ -87,7 +89,7 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>
+              <button value={props.fid} onClick={() => sendFriendRequest(props.fid, props.destination)}>SEND FRIEND REQUEST</button>
             </div>
           </div>
         </div>
