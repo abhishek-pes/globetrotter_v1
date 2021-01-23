@@ -62,7 +62,7 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button style={{ background: "green", color: "white" }}>FRIEND</button>
+              <button style={{ background: "green", color: "white" }}>FRIEND</button> <i class="material-icons">thumb_up</i>
             </div>
           </div>
         </div>
