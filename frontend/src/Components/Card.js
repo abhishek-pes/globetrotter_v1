@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Card(props) {
 
 
-  const sendFriendRequest = (fid, dest) => {
+  const sendFriendRequest = (fid) => {
     fetch("http://localhost:5000/api/users/friend/send", {
       method: "PUT",
       headers: {
@@ -12,14 +12,24 @@ function Card(props) {
         "Content-Type": "application/json",
         uid: JSON.parse(localStorage.getItem("user"))._id.toString(),
         "fid": fid,
-        "dest": dest,
-        "privatekey": (JSON.parse(localStorage.getItem('user')).privateKey).toString()
       },
     })
       .then((res) => res.json()).then(() => {
         alert("friend request sent")
       })
       .catch((err) => console.log(err));
+  }
+
+  const add_reccomend = (dest) => {
+    fetch("http://localhost:5000/api/test/reccomend", {
+      method: "POST",
+      headers: {
+        "x-auth-token": localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+        "dest": dest,
+        "privatekey": (JSON.parse(localStorage.getItem('user')).privateKey).toString()
+      },
+    })
   }
   // console.log("friend list : ", localStorage.getItem("user").friendlist)
   let frarray = JSON.parse(localStorage.getItem("user")).friendlist;
@@ -62,7 +72,8 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button style={{ background: "green", color: "white" }}>FRIEND</button> <i class="material-icons">thumb_up</i>
+              <button style={{ background: "green", color: "white" }}>FRIEND</button>
+              <button onClick={() => add_reccomend(props.destination)}>Like</button>
             </div>
           </div>
         </div>
@@ -89,7 +100,8 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button value={props.fid} onClick={() => sendFriendRequest(props.fid, props.destination)}>SEND FRIEND REQUEST</button> <i class="material-icons">thumb_up</i>
+              <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>
+              <button onClick={()=> add_reccomend(props.destination)}>Like</button>
             </div>
           </div>
         </div>

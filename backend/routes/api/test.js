@@ -77,6 +77,37 @@ router.get("/withdraw",(req,res)=> {
     res.send("withdrawn")
 })
 
+router.post("/reccomend",(req,res) => {
+  try{
+    var TRAVEL_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel'
+
+    const streamr = new StreamrClient({
+      auth: {
+        privateKey: req.headers.privatekey,
+      },
+      url: "wss://hack.streamr.network/api/v1/ws",
+      restUrl: "https://hack.streamr.network/api/v1"
+    })
+
+    const dest = {
+      "destination of choice": req.headers.dest
+    }
+
+    streamr.joinDataUnion(DATA_UNION_CONTRACT_ADDRESS, SHARED_SECRET)
+      .then((memberDetails) => {
+        console.log('memberDetails: ', memberDetails)
+
+        streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel',
+          dest
+        )
+      })
+
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
 
 //privateKey:"0xb800ef74d7baa399ca1159976a20f0bd8eb0a4ad65dae67828b0d381ba79a97b"
 

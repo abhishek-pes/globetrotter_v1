@@ -6,13 +6,6 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
 
-const StreamrClient = require('streamr-client')
-const API = 'f085735391c60a402f4742b0f859f8c495472baf411e1bd21fbc579bfa884bf9'
-
-const SHARED_SECRET = "9rpMdLArQ3C8_-ISvBLrLgrTzIjC2oRFuE5YuPyfyc3w"
-const DATA_UNION_CONTRACT_ADDRESS = "0x9a722acfb84b51e5b01b9b9331648924814f8f8d"
-
-
 const User = require("../../models/User");
 const { findById } = require("../../models/User");
 
@@ -192,30 +185,6 @@ async function requestsender(from, to) {
 
 router.put("/friend/send", [auth], async (req, res) => {
   try {
-
-    var TRAVEL_STREAM_ID = '0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel'
-
-    const streamr = new StreamrClient({
-      auth: {
-        privateKey: req.headers.privatekey,
-      },
-      url: "wss://hack.streamr.network/api/v1/ws",
-      restUrl: "https://hack.streamr.network/api/v1"
-    })
-
-    const dest = {
-      "destination of choice": req.headers.dest
-    }
-
-    streamr.joinDataUnion(DATA_UNION_CONTRACT_ADDRESS, SHARED_SECRET)
-      .then((memberDetails) => {
-        console.log('memberDetails: ', memberDetails)
-
-        streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/travel', {
-          dest: dest
-        })
-      })
-
     //storing friendrequests
     data = await User.findById({ _id: req.headers.uid }).select(
       "friendrequestsent"
