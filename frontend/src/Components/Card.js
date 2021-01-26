@@ -1,5 +1,8 @@
 import { React } from "react";
 import { Link } from 'react-router-dom'
+import FavoriteIcon from '@material-ui/icons/ThumbUpOutlined';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import "./styles/center.css"
 
 function Card(props) {
 
@@ -53,7 +56,8 @@ function Card(props) {
   if (frarray.includes(props.fid) || fr_array.includes(props.fid)) {
     // console.log("reached");
     return (
-      < div className="row " >
+      <div className="makecenter">
+      < div className="column" >
 
         <div className="col s12 m7">
 
@@ -72,19 +76,20 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button style={{ background: "green", color: "white" }}>FRIEND</button>
-              <button onClick={() => add_reccomend(props.destination)}>Like</button>
+               <PeopleOutlineIcon/>FRIENDS&nbsp;&nbsp;
+              <button onClick={() => add_reccomend(props.destination)}> <FavoriteIcon/> </button>
             </div>
           </div>
         </div>
       </div >
+      </div>
 
     )
   }
   else if (!frarray.includes(props.fid) || !fr_array.includes(props.fid)) {
     return (
-
-      <div className="row ">
+      <div className="makecenter">
+      <div className="column">
         <div className="col s12 m7">
           <div className="card hoverable ">
             <div className="card-image">
@@ -100,11 +105,12 @@ function Card(props) {
               </Link>
             </div>
             <div className="card-action">
-              <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>
-              <button onClick={()=> add_reccomend(props.destination)}>Like</button>
+              <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>&nbsp;&nbsp;
+              <button onClick={()=> add_reccomend(props.destination)}><FavoriteIcon/></button>
             </div>
           </div>
         </div>
+      </div>
       </div>
 
     );
