@@ -1,4 +1,8 @@
 import React from 'react';
+import img1 from './Assets/1.png'
+import img2 from './Assets/2.png'
+import img3 from './Assets/3.png'
+
 
 const jumbotronStyle = {
     paddingBottom: '150px',
@@ -7,11 +11,12 @@ const jumbotronStyle = {
 
 const Landing = () => {
     return (
-        <div className="card-panel grey lighten-3" style={jumbotronStyle}>
-            <div className="container">
-                <h1>GlobeTrotter</h1>
-                <p>Your Travel App</p>
-            </div>
+        <div>
+            <img src={img1} style={{width:"100%",marginLeft:"0%"}}></img>
+        <div style={{marginTop:"0%"}}>
+            <img src={img2} style={{width:"80%"}}></img>
+            <img src={img3} style={{width:"80%",marginLeft:"20%"}}></img>
+        </div>
         </div>
     );
 }
