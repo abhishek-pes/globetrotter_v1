@@ -56,62 +56,57 @@ function Card(props) {
   if (frarray.includes(props.fid) || fr_array.includes(props.fid)) {
     // console.log("reached");
     return (
-      <div className="makecenter">
-      < div className="column" >
+      <div>
 
-        <div className="col s12 m7">
 
-          <div className="card hoverable ">
-            <div className="card-image">
-              <img src={props.url} alt='dest' />
-              <span className="card-title" >{props.destination}</span>
-            </div>
+        <div className="card hoverable" style={{ maxWidth: "700px", margin: "20px" }}>
+          <div className="card-image">
+            <img src={props.url} alt='dest' style={{ width: '400px', height: "300px" }} />
+            <span className="card-title" ><strong>{props.destination}</strong></span>
+          </div>
 
-            <div className="card-content">
-              {props.description}
-              <Link to={'/userdetails/' + props.user._id} >
-                <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>
-                  <img alt='user' src={props.user.avatar} style={{ height: '40px', width: '40px', borderRadius: "20px", marginRight: "10px" }} /> {props.user.name}
-                </div>
-              </Link>
-            </div>
-            <div className="card-action">
-               <PeopleOutlineIcon/>FRIENDS&nbsp;&nbsp;
-              <button onClick={() => add_reccomend(props.destination)}> <FavoriteIcon/> </button>
-            </div>
+          <div className="card-content">
+            {props.description}
+            <Link to={'/userdetails/' + props.user._id} >
+              <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>
+                <img alt='user' src={props.user.avatar} style={{ height: '40px', width: '40px', borderRadius: "20px", marginRight: "10px" }} /> {props.user.name}
+              </div>
+            </Link>
+          </div>
+          <div className="card-action">
+            <PeopleOutlineIcon />FRIENDS&nbsp;&nbsp;
+               <button onClick={() => add_reccomend(props.destination)}> <FavoriteIcon /> </button>
           </div>
         </div>
-      </div >
       </div>
+
 
     )
   }
   else if (!frarray.includes(props.fid) || !fr_array.includes(props.fid)) {
     return (
-      <div className="makecenter">
-      <div className="column">
-        <div className="col s12 m7">
-          <div className="card hoverable ">
-            <div className="card-image">
-              <img src={props.url} alt='dest' />
-              <span className="card-title" >{props.destination}</span>
-            </div>
-            <div className="card-content">
-              {props.description}
-              <Link to={'/userdetails/' + props.user._id}>
-                <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>
-                  <img alt='user' src={props.user.avatar} style={{ height: '40px', width: '40px', borderRadius: "20px", marginRight: "10px" }} /> {props.user.name}
-                </div>
-              </Link>
-            </div>
-            <div className="card-action">
-              <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>&nbsp;&nbsp;
-              <button onClick={()=> add_reccomend(props.destination)}><FavoriteIcon/></button>
-            </div>
+      <div>
+
+        <div className="card hoverable" style={{ maxWidth: "700px", margin: "20px" }}>
+          <div className="card-image">
+            <img src={props.url} alt='dest' style={{ width: '400px', height: "300px" }} />
+            <span className="card-title" ><strong>{props.destination}</strong></span>
+          </div>
+          <div className="card-content">
+            {props.description}
+            <Link to={'/userdetails/' + props.user._id}>
+              <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>
+                <img alt='user' src={props.user.avatar} style={{ height: '40px', width: '40px', borderRadius: "20px", marginRight: "10px" }} /> {props.user.name}
+              </div>
+            </Link>
+          </div>
+          <div className="card-action">
+            <button value={props.fid} onClick={() => sendFriendRequest(props.fid)}>SEND FRIEND REQUEST</button>&nbsp;&nbsp;
+              <button onClick={() => add_reccomend(props.destination)}><FavoriteIcon /></button>
           </div>
         </div>
       </div>
-      </div>
+
 
     );
   }

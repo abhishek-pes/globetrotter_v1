@@ -41,31 +41,54 @@ function Inbox() {
       })
       .catch((err) => console.log(err));
   };
-  return (
-    <div>
-      <div>
-        <h4>
-          This is Inbox
-          <hr></hr>
-        </h4>
-      </div>
 
-      {reqId.map((d) => {
-        return (
-          <div key={d.split(";")[0]}>
-            <p>{d.split(";")[1]}</p>
-            &nbsp;
-            <button value="true" onClick={() => onAccept(d.split(";")[0], "true")}>
-              ACCEPT
-            </button>
-            &nbsp;
-            <button value="reject" onClick={() => onAccept(d.split(";")[0], "false")} > REJECT</button>
+
+  // const loader = () => {
+  //   return (
+  //     <div className="progress">
+  //       <div className="indeterminate"></div>
+  //     </div>
+  //   )
+  // }
+
+  if (reqId.length != 0) {
+
+    return (
+      <div>
+        <div>
+          <h2>
+            This is Inbox
             <hr></hr>
-          </div>
-        );
-      })}
-    </div>
-  );
+          </h2>
+        </div>
+
+        {reqId.map((d) => {
+          return (
+            <div key={d.split(";")[0]}>
+              <div className="card hoverable" style={{ margin: "20px", maxWidth: "700px", height: "110px" }}>
+                <div className="card-image" style={{ paddingLeft: "20px" }}>
+                  <img src={'https://robohash.org/' + d.split(";")[0]} style={{ width: '50px', height: "50px", borderRadius: "100%" }}
+                    alt="destinationpostedbyyou" />
+                </div>
+
+                <div style={{ fontSize: "18px", marginLeft: "30px" }}>{d.split(";")[1]}</div>
+                <button value="true" style={{ marginLeft: "15px" }} onClick={() => onAccept(d.split(";")[0], "true")}>
+                  ACCEPT
+              </button>
+                <button value="reject" style={{ marginLeft: "5px" }} onClick={() => onAccept(d.split(";")[0], "false")} > REJECT</button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      [<div className="progress">
+        <div className="indeterminate"></div>
+      </div>, <h2>Empty Inbox</h2>]
+    )
+  }
 }
 
 export default Inbox;

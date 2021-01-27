@@ -44,30 +44,52 @@ function Friends() {
     getFriendlist()
   }, []);
 
-  return (
-    <div>
-      <div>
-        <h4>
-          This is Friend list
-          <hr></hr>
-        </h4>
-      </div>
+  if (friendList.length != 0) {
 
-      {friendList.map((f) => {
-        return (
-          <div key={f.split(";")[0]}>
-            <p>{f.split(";")[1]}</p>
-            <button value="unfriend" onClick={() => unfriend(f.split(";")[0])}>UNFRIEND</button>
-            <hr></hr>
-          </div>
-        );
-      })}
-      <input type='text' onChange={(e) => setRoom(e.target.value)} />
-      <Link to={`/chat?name=${JSON.parse(localStorage.getItem('user')).name}&room=${room}`}>
-        <button value="chat">Join Chat</button>
-      </Link>
-    </div >
-  );
+    return (
+      <div>
+        <div>
+          <h2>
+            This is Friend list :)
+          <hr></hr>
+          </h2>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+
+
+          {friendList.map((f) => {
+            return (
+              <div key={f.split(";")[0]}>
+                <div className="card hoverable" style={{ margin: "20px", maxWidth: "700px" }}>
+                  <div className="card-image">
+                    <img src={'https://robohash.org/' + f.split(";")[0]} style={{ width: '150px', height: "150px", borderRadius: "100%" }}
+                      alt="destinationpostedbyyou" />
+                  </div>
+                  <div className="card-title" style={{ color: "black", marginLeft: "30px" }}><p>{f.split(";")[1]}</p>
+                  </div>
+                  <div className="card-content">
+                    <button value="unfriend" onClick={() => unfriend(f.split(";")[0])}>UNFRIEND</button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <input type='text' onChange={(e) => setRoom(e.target.value)} />
+        <Link to={`/chat?name=${JSON.parse(localStorage.getItem('user')).name}&room=${room}`}>
+          <button value="chat">Join Chat</button>
+        </Link>
+      </div >
+    );
+  }
+  else {
+    return (
+      [<div className="progress">
+        <div className="indeterminate"></div>
+      </div>, <h2>No Friends :(</h2>]
+    )
+  }
+
 }
 
 export default Friends;

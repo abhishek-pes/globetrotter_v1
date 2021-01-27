@@ -237,10 +237,7 @@ router.post(
       }
       //get users gravatar
 
-      const avatar = gravatar.url(email, {
-        s: "200",
-        d: "mm",
-      });
+      const avatar = "https://robohash.org/" + name
       var playerWallet = StreamrClient.generateEthereumAccount()
       const privateKey = playerWallet.privateKey
       user = new User({

@@ -41,26 +41,40 @@ function Home() {
       })
       .catch((err) => alert("somettext"));
   }, []);
-  return (
-    <div>
-      {
-        dests.map((d) => {
-          return (
-            <Card
-              key={d._id}
-              user={d.user}
-              fid={d.user._id}
-              destination={d.destination}
-              description={d.description}
-              name={d.user.name}
-              url={d.image_url}
-            />
-          );
-        })
-      }
-    </div >
 
-  );
+  console.log()
+  if (dests.length != 0) {
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {
+          dests.map((d) => {
+            return (
+              <Card
+                key={d._id}
+                user={d.user}
+                fid={d.user._id}
+                destination={d.destination}
+                description={d.description}
+                name={d.user.name}
+                url={d.image_url}
+              />
+            );
+          })
+        }
+      </div >
+
+
+    );
+
+  } else {
+    return (
+      <div className="progress">
+        <div className="indeterminate"></div>
+      </div>
+    )
+  }
+
+
 }
 
 export default Home;
