@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const StreamrClient = require('streamr-client')
 const ethers = require('ethers')
-
-const API = 'f085735391c60a402f4742b0f859f8c495472baf411e1bd21fbc579bfa884bf9'
 var SHARED_SECRET = "9rpMdLArQ3C8_-ISvBLrLgrTzIjC2oRFuE5YuPyfyc3w"
 var DATA_UNION_CONTRACT_ADDRESS = "0x9a722acfb84b51e5b01b9b9331648924814f8f8d"
 

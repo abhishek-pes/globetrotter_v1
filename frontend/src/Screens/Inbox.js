@@ -67,7 +67,7 @@ function Inbox() {
             <div key={d.split(";")[0]}>
               <div className="card hoverable" style={{ margin: "20px", maxWidth: "700px", height: "110px" }}>
                 <div className="card-image" style={{ paddingLeft: "20px" }}>
-                  <img src={'https://robohash.org/' + d.split(";")[0]} style={{ width: '50px', height: "50px", borderRadius: "100%" }}
+                  <img src={'https://robohash.org/' + d.split(";")[1]} style={{ width: '50px', height: "50px", borderRadius: "100%" }}
                     alt="destinationpostedbyyou" />
                 </div>
 

@@ -1,14 +1,12 @@
 const express = require("express");
 const { check, validationResult } = require("express-validator");
-const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const auth = require("../../middleware/auth");
-
 const User = require("../../models/User");
 const { findById } = require("../../models/User");
-
+const StreamrClient = require('streamr-client')
 const router = express.Router();
 
 router.get("/me", auth, async (req, res) => {
@@ -101,10 +99,8 @@ async function friendaccept(uid, frid) {
   //removing the friendrequest once the friend is accepted
   await friendrequestRemove(frid, uid);
 
-  console.log(list);
 }
 
-//stuff to take care of is .. if the user already in friends , then do not allow sending friend request again.
 
 router.put("/inbox/request", async (req, res) => {
   try {
@@ -112,8 +108,6 @@ router.put("/inbox/request", async (req, res) => {
     const uid = req.headers.uid;
     const frid = req.headers.frid;
     if (val == "true") {
-      // const uid = req.headers.uid;
-      // const frid = req.headers.frid;
       await friendaccept(uid, frid);
       res.json({ msg: "friend request accepted" });
     } else if (val == 'false') {
@@ -142,7 +136,6 @@ router.get("/friend", [auth], async (req, res) => {
     friend_details = await User.findById({ _id: friend_list[i] }).select("name");
     friend_list[i] = friend_list[i] + ";" + friend_details.name;
   }
-  // console.log(friend_list)
   res.send(friend_list);
 });
 
@@ -167,14 +160,11 @@ router.put("/unfriend", [auth], async (req, res) => {
 
 
 async function requestsender(from, to) {
-  // console.log("friend request from : " + from + " to: " + to);
   for (i = 0; i < to.length; i++) {
     data = await User.findById({ _id: to[i] }).select("inbox");
     inbox_list = data.inbox;
     inbox_list.push(from);
     set_list = new Set(inbox_list);
-    // console.log(inbox_list);
-    // console.log(final_list);
     await User.findByIdAndUpdate(
       to[i],
       { $set: { inbox: Array.from(set_list) } },
@@ -202,7 +192,6 @@ router.put("/friend/send", [auth], async (req, res) => {
     const list = await User.findOne({
       _id: req.headers.uid,
     }).select("friendrequestsent");
-    console.log(list);
     requestsender(list._id, list.friendrequestsent);
     res.json(list);
   } catch (err) {
@@ -225,7 +214,6 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const { name, email, password, accountType, friendrequestsent } = req.body;
-    console.log(req.body);
     try {
       //if the user exist
 
@@ -238,6 +226,13 @@ router.post(
       //get users gravatar
 
       const avatar = "https://robohash.org/" + name
+      const streamr = new StreamrClient({
+        auth: {
+          privateKey: req.headers.privatekey,
+        },
+        url: "wss://hack.streamr.network/api/v1/ws",
+        restUrl: "https://hack.streamr.network/api/v1"
+      })
       var playerWallet = StreamrClient.generateEthereumAccount()
       const privateKey = playerWallet.privateKey
       user = new User({
@@ -265,7 +260,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get("jwtsecret"),
+        config.get("jwtsecret"),   
         { expiresIn: 36000 },
         (err, token) => {
           if (err) throw err;

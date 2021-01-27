@@ -65,7 +65,7 @@ function Card(props) {
             <span className="card-title" ><strong>{props.destination}</strong></span>
           </div>
 
-          <div className="card-content">
+          <div className="card-content" style={{maxWidth:"400px"}}>
             {props.description}
             <Link to={'/userdetails/' + props.user._id} >
               <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>
@@ -92,7 +92,7 @@ function Card(props) {
             <img src={props.url} alt='dest' style={{ width: '400px', height: "300px" }} />
             <span className="card-title" ><strong>{props.destination}</strong></span>
           </div>
-          <div className="card-content">
+          <div className="card-content" style={{maxWidth:"400px"}}>
             {props.description}
             <Link to={'/userdetails/' + props.user._id}>
               <div style={{ paddingTop: "20px", display: 'flex', alignItems: 'center' }}>

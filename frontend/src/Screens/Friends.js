@@ -62,7 +62,7 @@ function Friends() {
               <div key={f.split(";")[0]}>
                 <div className="card hoverable" style={{ margin: "20px", maxWidth: "700px" }}>
                   <div className="card-image">
-                    <img src={'https://robohash.org/' + f.split(";")[0]} style={{ width: '150px', height: "150px", borderRadius: "100%" }}
+                    <img src={'https://robohash.org/' + f.split(";")[1]} style={{ width: '150px', height: "150px", borderRadius: "100%" }}
                       alt="destinationpostedbyyou" />
                   </div>
                   <div className="card-title" style={{ color: "black", marginLeft: "30px" }}><p>{f.split(";")[1]}</p>
@@ -75,7 +75,8 @@ function Friends() {
             );
           })}
         </div>
-        <input type='text' onChange={(e) => setRoom(e.target.value)} />
+        <h5 style={{marginLeft:"25px"}}> Create/Join Room</h5>
+        <input type='text' style={{maxWidth:"500px", color:"black", marginLeft:"30px"}} placeholder="Create/Join Room" onChange={(e) => setRoom(e.target.value)} />
         <Link to={`/chat?name=${JSON.parse(localStorage.getItem('user')).name}&room=${room}`}>
           <button value="chat">Join Chat</button>
         </Link>

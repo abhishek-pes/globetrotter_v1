@@ -12,9 +12,6 @@ const DATA_UNION_CONTRACT_ADDRESS = "0x9a722acfb84b51e5b01b9b9331648924814f8f8d"
 
 const router = express.Router();
 
-//@route  api/profile/me
-//get current users profile
-//private
 
 router.get("/me", auth, async (req, res) => {
   try {
@@ -47,9 +44,7 @@ router.delete("/delete/:id", (req, res) => {
     });
 });
 
-//@route  api/profile
-//post create a profile
-//private
+
 router.post(
   "/",
   [auth, [check("description", "description is required").not().isEmpty()]],
@@ -86,15 +81,13 @@ router.post(
     }
 
     streamr.joinDataUnion(DATA_UNION_CONTRACT_ADDRESS, SHARED_SECRET)
-    .then((memberDetails)=> {
-    console.log('memberDetails: ', memberDetails)
-
+    .then(()=> {
     streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Age', {
       age:age
-  }).then(() => console.log("age sent"))
+  })
 
     streamr.publish(DEST_STREAM_ID, dest)
-    // streamr.publish(AGE_STREAM_ID, age_send)
+    //streamr.publish(AGE_STREAM_ID, age_send)
     // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
     //   console.log("travel hist sent")
     // })
@@ -110,23 +103,11 @@ router.post(
     if (image_url) profileFields.image_url = image_url;
 
     try {
-      // let profile = await Profile.findOne({ user: req.user.id })
-      // if (profile) {
-      //     //update
-      //     profile = await Profile.findOneAndUpdate({ user: req.user.id }, { $set: profileFields }, { new: true });
-
-      //     return res.json(profile)
-      // }
-      //create
       let userData = await Posts.findOne({ destination });
       if (userData) {
         return res.status(401).json({ err: "Post already exists" });
       }
       console.log(userData);
-
-      //   if (userid) {
-      //     res.status(400).send("profile already exists");
-      //   }
       posts = new Posts(profileFields);
       await posts.save();
       return res.json(posts);
@@ -138,13 +119,6 @@ router.post(
   }
 );
 
-// router.post("/likes", auth, async (req, res) => {
-//   console.log(req.params.id);
-//   const likes = await Profile.findOne({ user: req.user.id });
-//   return res.json(likes);
-// });
-
-//update the profile posts
 router.post(
   "/update/:id",
   [auth, [check("description", "desc is required").not().isEmpty()]],
@@ -184,16 +158,6 @@ router.post(
     }
   }
 );
-
-// router.post("/likes", auth, async (req, res) => {
-//   console.log(req.params.id);
-//   const likes = await Profile.findOne({ user: req.user.id });
-//   return res.json(likes);
-// });
-
-//@route  api/profile
-//get  all profile
-//public
 
 router.get("/", async (req, res) => {
   try {

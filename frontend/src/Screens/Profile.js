@@ -97,8 +97,8 @@ function Profile() {
                       <span className="card-title">{d.destination}
                       </span>
                     </div>
-                    <div className="card-content">
-                      <p>{d.description}</p>
+                    <div className="card-content" style={{maxWidth:"400px"}}>
+                      {d.description}
                     </div>
 
                   </div>
