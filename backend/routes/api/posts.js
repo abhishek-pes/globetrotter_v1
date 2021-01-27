@@ -30,6 +30,23 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
+router.get("/clickedUser", auth, async (req, res) => {
+  try {
+    const posts = await Posts.find({ user: req.headers.id }).populate("user", [
+      "name",
+      "avatar",
+      "email",
+    ]);
+    if (!posts) {
+      return res.status(400).json({ msg: "There is no profile for this user" });
+    }
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("server error");
+  }
+});
+
 router.delete("/delete/:id", (req, res) => {
   Posts.findByIdAndRemove(req.params.id)
     .then((doc) => {
@@ -67,7 +84,7 @@ router.post(
         privateKey: req.headers.privatekey,
       },
       url: "wss://hack.streamr.network/api/v1/ws",
-      restUrl : "https://hack.streamr.network/api/v1"
+      restUrl: "https://hack.streamr.network/api/v1"
     })
 
     const dest = {
@@ -81,19 +98,19 @@ router.post(
     }
 
     streamr.joinDataUnion(DATA_UNION_CONTRACT_ADDRESS, SHARED_SECRET)
-    .then(()=> {
-    streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Age', {
-      age:age
-  })
+      .then(() => {
+        streamr.publish('0xfe0d298da1223de5d6b3ef8c0785ab57a46e68f5/Age', {
+          age: age
+        })
 
-    streamr.publish(DEST_STREAM_ID, dest)
-    //streamr.publish(AGE_STREAM_ID, age_send)
-    // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
-    //   console.log("travel hist sent")
-    // })
-    streamr.publish(COO_STREAM_ID, origin_send)
-  })
-    
+        streamr.publish(DEST_STREAM_ID, dest)
+        //streamr.publish(AGE_STREAM_ID, age_send)
+        // streamr.publish(TRAVEL_STREAM_ID, msg).then(() => {
+        //   console.log("travel hist sent")
+        // })
+        streamr.publish(COO_STREAM_ID, origin_send)
+      })
+
 
     //Build profile objects
     const profileFields = {};
