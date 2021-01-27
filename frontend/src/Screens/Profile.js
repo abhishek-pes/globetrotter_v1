@@ -94,7 +94,7 @@ function Profile() {
                     <div className="card-image">
                       <img src={d.image_url} style={{ width: '400px', height: "300px" }}
                         alt="destinationpostedbyyou" />
-                      <span className="card-title">{d.destination}
+                      <span className="card-title"><strong>{d.destination}</strong>
                       </span>
                     </div>
                     <div className="card-content" style={{ maxWidth: "400px" }}>
